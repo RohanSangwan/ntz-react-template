@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useMemo } from "react";
+import { RouterProvider } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ThemeProvider, ThemeOptions } from "@mui/material/styles";
+import { router } from "src/router";
+import { useAppSelector } from "src/redux/hooks";
+import { ThemesObjectType } from "src/types";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+const App: React.FC = () => {
+  const queryClient = new QueryClient();
+  const themes: ThemesObjectType = useAppSelector(
+    (state) => state.theme.themes
   );
-}
+  const selectedTheme: string = useAppSelector(
+    (state) => state.theme.selectedTheme
+  );
+
+  const themeToApply = useMemo<ThemeOptions>(() => {
+    let allthemes: any = themes,
+      theme: ThemeOptions = allthemes[selectedTheme];
+    return theme;
+  }, [themes, selectedTheme]);
+
+  return (
+    <ThemeProvider theme={themeToApply}>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    </ThemeProvider>
+  );
+};
 
 export default App;
