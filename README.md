@@ -2,6 +2,19 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+# React.js Template with:
+
+- Typescript with Strictly Typed Components.
+- Day/Night Theme Selection.
+- Mui Styled Components (**Don't use css or scss files to apply custom styles, use mui styled components only**). 
+- Public and Protected/Authenticated Routes.
+- Redux-Toolkit Implemented.
+- Api calls with react-query.
+- Interceptor for Api responses.
+- Development and Production environment setup.
+- React MUI for prebuilt UI components.
+- Added commonly used modules like date-fns, lodash etc.
+
 ## Available Scripts
 
 In the project directory, you can run:
